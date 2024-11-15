@@ -15,7 +15,7 @@ const ProductInfo = () => {
     const fetchProductInfo = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:5000/api/cars/get-car/${carId}`, {
+        const response = await axios.get(`https://global-dominion-383716.el.r.appspot.com/api/cars/get-car/${carId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCar(response.data);
@@ -46,7 +46,7 @@ const ProductInfo = () => {
   const handleUpdateCar = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5000/api/cars/update-car/${carId}`, formData, {
+      await axios.put(`https://global-dominion-383716.el.r.appspot.com/api/cars/update-car/${carId}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success('Car updated successfully');
