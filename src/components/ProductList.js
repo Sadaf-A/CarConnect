@@ -19,7 +19,7 @@ const CarConnect = () => {
           navigate('/');
           return;
         }
-        const response = await axios.get('http://localhost:5000/api/cars/get-cars', {
+        const response = await axios.get('https://global-dominion-383716.el.r.appspot.com/api/cars/get-cars', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCars(response.data); 
