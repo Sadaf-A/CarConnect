@@ -12,7 +12,7 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('https://global-dominion-383716.el.r.appspot.com/api/auth/register', {
         username,
         email,
         password,
