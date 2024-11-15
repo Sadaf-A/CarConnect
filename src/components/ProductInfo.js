@@ -61,7 +61,7 @@ const ProductInfo = () => {
   const handleDeleteCar = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/cars/delete-car/${carId}`, {
+      await axios.delete(`https://global-dominion-383716.el.r.appspot.com/api/cars/delete-car/${carId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success('Car deleted successfully');
