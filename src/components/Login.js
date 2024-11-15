@@ -11,7 +11,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('https://global-dominion-383716.el.r.appspot.com/api/auth/login', {
         email,
         password,
       });
