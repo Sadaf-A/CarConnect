@@ -110,7 +110,8 @@ const AddCar = () => {
           <div className="flex flex-1 justify-end gap-8">
             <div className="flex items-center gap-9">
               <a className="text-[#FFFFFF] text-sm font-medium leading-normal" href="product-list.html">Home</a>
-              <a className="text-[#FFFFFF] text-sm font-medium leading-normal" href="#">Documentation</a>
+              <a className="text-[#FFFFFF] text-sm font-medium leading-normal" href="https://car-connect-docs.vercel.app/docs/introduction">Documentation</a>
+              <a className="text-[#FFFFFF] text-sm font-medium leading-normal" href="https://global-dominion-383716.el.r.appspot.com/api-docs/">API Docs</a>
               <a className="text-[#FFFFFF] text-sm font-medium leading-normal" href="login.html">Login</a>
             </div>
             <div className="flex gap-2">
