@@ -24,7 +24,7 @@ const AnimatedArrow = () => {
   return (
     <svg width="500" height="500" viewBox="0 0 500 500" className="absolute w-full h-full">
       <motion.path
-       d="M10,100 C35,60 70,60 100,100 C130,140 160,140 180,100 C200,60 230,60 260,100 C240,140 200,140 180,100 L250,-100"
+       d="M10,100 C35,60 70,60 100,100 C130,140 160,140 180,100 L270,-120"
         fill="transparent"
         stroke="#EA2831"
         strokeWidth="2"
