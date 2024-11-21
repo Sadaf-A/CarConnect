@@ -99,6 +99,7 @@ const CarConnect = () => {
                   />
                 </div>
               </label>
+            </div>
                     {filteredCars.length === 0 ? (
                         <div className="flex flex-col items-center justify-center gap-4 text-center mt-20" style={{marginTop: 200}}>
                           <p className="text-[#FFFFFF] text-2xl font-bold">
@@ -107,8 +108,6 @@ const CarConnect = () => {
                           <AnimatedArrow />
                         </div>
                       ) : ( <> </> )}
-            </div>
-
             <div id="car-list" className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
    {filteredCars.map((car, index) => (
   <div
