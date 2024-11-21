@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { message } from 'antd'; 
 import { useNavigate } from 'react-router-dom'; 
+import AnimatedArrow from './Arrow';
 
 const CarConnect = () => {
   const [cars, setCars] = useState([]); 
