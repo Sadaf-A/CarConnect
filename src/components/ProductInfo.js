@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import { message } from 'antd';  // for message notifications
+import { Slider, message } from 'antd';
 
 const ProductInfo = () => {
   const [car, setCar] = useState(null);
-  const [isEditable, setIsEditable] = useState(false);  // Track edit mode
-  const [formData, setFormData] = useState({});  // Store form data for updating
+  const [isEditable, setIsEditable] = useState(false);
+  const [formData, setFormData] = useState({});
   const { carId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch car details on component mount
     const fetchProductInfo = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`https://global-dominion-383716.el.r.appspot.com/api/cars/get-car/${carId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          `https://global-dominion-383716.el.r.appspot.com/api/cars/get-car/${carId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setCar(response.data);
-        setFormData(response.data);  // Initialize form data with the current car data
+        setFormData(response.data);
       } catch (error) {
         console.error('Error fetching car details:', error);
         message.error('Failed to fetch car details');
@@ -33,39 +35,42 @@ const ProductInfo = () => {
     navigate('/product-list');
   };
 
-  // Handle input changes in the form
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (key, value) => {
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [key]: value,
     }));
   };
 
-  // Update the car details
   const handleUpdateCar = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`https://global-dominion-383716.el.r.appspot.com/api/cars/update-car/${carId}`, formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put(
+        `https://global-dominion-383716.el.r.appspot.com/api/cars/update-car/${carId}`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       message.success('Car updated successfully');
-      setIsEditable(false);  // Disable editing after updating
+      setIsEditable(false);
     } catch (error) {
       console.error('Error updating car:', error);
       message.error('Failed to update car');
     }
   };
 
-  // Delete the car
   const handleDeleteCar = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://global-dominion-383716.el.r.appspot.com/api/cars/delete-car/${carId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `https://global-dominion-383716.el.r.appspot.com/api/cars/delete-car/${carId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       message.success('Car deleted successfully');
-      navigate('/product-list');  // Redirect to the cars list after deletion
+      navigate('/product-list');
     } catch (error) {
       console.error('Error deleting car:', error);
       message.error('Failed to delete car');
@@ -79,116 +84,110 @@ const ProductInfo = () => {
   return (
     <div className="relative flex size-full min-h-screen flex-col bg-black dark group/design-root overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
-        <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#292929] px-10 py-3">
-          <div className="flex items-center gap-4 text-[#FFFFFF]">
-            <h2 className="text-[#FFFFFF] text-lg font-bold leading-tight tracking-[-0.015em]">Car Details</h2>
-          </div>
-          <div className="flex flex-1 justify-end gap-8">
-            <div className="flex gap-2">
+        <header className="flex items-center justify-between border-b border-solid border-b-[#292929] px-10 py-3">
+          <h2 className="text-[#FFFFFF] text-lg font-bold">Car Details</h2>
+          <div className="flex gap-4">
+            <button
+              onClick={handleGoBack}
+              className="bg-[#292929] text-[#FFFFFF] rounded-xl px-4 py-2"
+            >
+              Back to Cars List
+            </button>
+            {isEditable ? (
               <button
-                onClick={handleGoBack}
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#292929] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em]"
+                onClick={handleUpdateCar}
+                className="bg-[#EA2831] text-[#FFFFFF] rounded-xl px-4 py-2"
               >
-                Back to Cars List
+                Save Changes
               </button>
-              {isEditable ? (
-                <button
-                  onClick={handleUpdateCar}
-                  className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#EA2831] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em]"
-                >
-                  Save Changes
-                </button>
-              ) : (
-                <button
-                  onClick={() => setIsEditable(true)}
-                  className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#292929] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em]"
-                >
-                  Edit
-                </button>
-              )}
+            ) : (
               <button
-                onClick={handleDeleteCar}
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#FF4D4F] text-[#FFFFFF] text-sm font-bold leading-normal tracking-[0.015em]"
+                onClick={() => setIsEditable(true)}
+                className="bg-[#292929] text-[#FFFFFF] rounded-xl px-4 py-2"
               >
-                Delete
+                Edit
               </button>
-            </div>
+            )}
+            <button
+              onClick={handleDeleteCar}
+              className="bg-[#FF4D4F] text-[#FFFFFF] rounded-xl px-4 py-2"
+            >
+              Delete
+            </button>
           </div>
         </header>
 
-        <div className="px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-            {/* Car Image */}
+        <div className="px-40 py-5 flex justify-center">
+          <div className="max-w-[960px] flex flex-col">
             {car.imageUrls && car.imageUrls.length > 0 && (
-              <div className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl">
-                <img
-                  src={car.imageUrls[0]}
-                  alt={car.title}
-                  className="w-full h-full object-cover rounded-xl"
-                />
-              </div>
+              <img
+                src={car.imageUrls[0]}
+                alt={car.title}
+                className="w-full rounded-xl"
+              />
             )}
 
-            {/* Car Information */}
-            <div className="flex flex-col gap-3 pt-5">
+            <div className="flex flex-col gap-4 pt-5">
               <div>
-                <label className="text-[#FFFFFF] text-base font-medium leading-normal">Title</label>
+                <label className="text-[#FFFFFF]">Title</label>
                 <input
                   type="text"
-                  name="title"
                   value={formData.title || ''}
                   disabled={!isEditable}
-                  onChange={handleInputChange}
-                  className="form-input w-full text-[#FFFFFF] bg-[#212121] border-[#303030] rounded-xl p-3"
+                  onChange={(e) => handleInputChange('title', e.target.value)}
+                  className="w-full p-3 rounded-xl bg-[#212121] text-[#FFFFFF]"
                 />
               </div>
 
               <div>
-                <label className="text-[#FFFFFF] text-base font-medium leading-normal">Description</label>
+                <label className="text-[#FFFFFF]">Description</label>
                 <input
                   type="text"
-                  name="description"
                   value={formData.description || ''}
                   disabled={!isEditable}
-                  onChange={handleInputChange}
-                  className="form-input w-full text-[#FFFFFF] bg-[#212121] border-[#303030] rounded-xl p-3"
+                  onChange={(e) =>
+                    handleInputChange('description', e.target.value)
+                  }
+                  className="w-full p-3 rounded-xl bg-[#212121] text-[#FFFFFF]"
                 />
               </div>
 
               <div>
-                <label className="text-[#FFFFFF] text-base font-medium leading-normal">Car Number</label>
+                <label className="text-[#FFFFFF]">Car Number</label>
                 <input
                   type="text"
-                  name="carNumber"
                   value={formData.carNumber || ''}
                   disabled={!isEditable}
-                  onChange={handleInputChange}
-                  className="form-input w-full text-[#FFFFFF] bg-[#212121] border-[#303030] rounded-xl p-3"
+                  onChange={(e) =>
+                    handleInputChange('carNumber', e.target.value)
+                  }
+                  className="w-full p-3 rounded-xl bg-[#212121] text-[#FFFFFF]"
                 />
               </div>
 
               <div>
-                <label className="text-[#FFFFFF] text-base font-medium leading-normal">Year</label>
-                <input
-                  type="text"
-                  name="year"
-                  value={formData.year || ''}
+                <label className="text-[#FFFFFF]">Year</label>
+                <Slider
+                  min={2000}
+                  max={2023}
+                  value={formData.year || 2000}
+                  onChange={(value) => handleInputChange('year', value)}
                   disabled={!isEditable}
-                  onChange={handleInputChange}
-                  className="form-input w-full text-[#FFFFFF] bg-[#212121] border-[#303030] rounded-xl p-3"
                 />
+                <div className="text-[#FFFFFF]">{formData.year || 2000}</div>
               </div>
 
               <div>
-                <label className="text-[#FFFFFF] text-base font-medium leading-normal">Price</label>
-                <input
-                  type="text"
-                  name="price"
-                  value={formData.price || ''}
+                <label className="text-[#FFFFFF]">Price (₹)</label>
+                <Slider
+                  min={100000}
+                  max={5000000}
+                  step={10000}
+                  value={formData.price || 100000}
+                  onChange={(value) => handleInputChange('price', value)}
                   disabled={!isEditable}
-                  onChange={handleInputChange}
-                  className="form-input w-full text-[#FFFFFF] bg-[#212121] border-[#303030] rounded-xl p-3"
                 />
+                <div className="text-[#FFFFFF]">₹{formData.price || 100000}</div>
               </div>
             </div>
           </div>
