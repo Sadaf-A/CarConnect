@@ -136,8 +136,26 @@ const ProductInfo = () => {
         <div className="px-40 py-5">
           <div className="flex flex-col gap-5">
             {car.imageUrls && car.imageUrls.length > 0 && (
-              <img src={car.imageUrls[0]} alt={car.title} className="w-full h-auto rounded-xl" />
-            )}
+    <div>
+      <img
+        src={car.imageUrls[0]}
+        alt={car.title}
+        className="w-full h-auto rounded-xl mb-4"
+        style={{ maxHeight: '500px', objectFit: 'cover' }} 
+      />
+      
+      <div className="flex gap-3">
+        {car.imageUrls.slice(1).map((url, index) => (
+          <img
+            key={index}
+            src={url}
+            alt={`${car.title} ${index + 2}`}
+            className="w-24 h-24 object-cover rounded-lg border border-[#292929]"
+          />
+        ))}
+      </div>
+    </div>
+  )}
 
             <div className="flex flex-col gap-3">
               <input
