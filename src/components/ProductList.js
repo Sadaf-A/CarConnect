@@ -104,9 +104,7 @@ const CarConnect = () => {
                           <p className="text-[#FFFFFF] text-2xl font-bold">
                             You have no cars added yet.
                           </p>
-                          <AnimatedArrow 
-                          style={{ position: 'absolute', zIndex: 9999 }}
-                          />
+                          <AnimatedArrow />
                         </div>
                       ) : ( <> </> )}
             </div>
