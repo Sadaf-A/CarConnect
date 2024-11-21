@@ -108,7 +108,8 @@ const CarConnect = () => {
                           </p>
                           <AnimatedArrow />
                         </div>
-                      ) : (
+                      ) : ( <> </> )}
+{filteredCars.map((car, index) => (
   <div
     key={index}
     className="flex flex-col gap-3 pb-3 cursor-pointer"
