@@ -23,7 +23,8 @@ const ProductInfo = () => {
         });
         setCar(response.data);
         setFormData(response.data);
-      } catch (error) {
+        setMainImage(response.data.imageUrls?.[0] || null);         
+        } catch (error) {
         console.error('Error fetching car details:', error);
         message.error('Failed to fetch car details');
       }
