@@ -10,6 +10,7 @@ const ProductInfo = () => {
   const [emi, setEmi] = useState(null);
   const [loanTenure, setLoanTenure] = useState(12);
   const [interestRate, setInterestRate] = useState(10);
+  const [mainImage, setMainImage] = useState(null);
   const { carId } = useParams();
   const navigate = useNavigate();
 
@@ -138,22 +139,26 @@ const ProductInfo = () => {
             {car.imageUrls && car.imageUrls.length > 0 && (
     <div>
       <img
-        src={car.imageUrls[0]}
+        src={mainImage}
         alt={car.title}
         className="w-full h-auto rounded-xl mb-4"
         style={{ maxHeight: '500px', objectFit: 'cover' }} 
       />
       
-      <div className="flex gap-3">
-        {car.imageUrls.slice(1).map((url, index) => (
-          <img
-            key={index}
-            src={url}
-            alt={`${car.title} ${index + 2}`}
-            className="w-24 h-24 object-cover rounded-lg border border-[#292929]"
+    <div className="flex gap-3">
+      {car.imageUrls.map((url, index) => (
+        <img
+          key={index}
+          src={url}
+          alt={`${car.title} ${index + 1}`}
+          onClick={() => setMainImage(url)}
+          className={`w-24 h-24 object-cover rounded-lg border ${
+          mainImage === url ? 'border-[#EA2831] border-4' : 'border-[#292929]'
+            }`}
+          style={{ cursor: 'pointer' }}
           />
         ))}
-      </div>
+    </div>      
     </div>
   )}
 
