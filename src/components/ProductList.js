@@ -100,45 +100,41 @@ const CarConnect = () => {
               </label>
             </div>
 
-            {/* Display the list of filtered cars */}
             <div id="car-list" className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-  {filteredCars.map((car, index) => (
-                    <div
-                  key={index}
-                  className="flex flex-col gap-3 pb-3 cursor-pointer"
-                  onClick={() => navigate(`/car-details/${car._id}`)} // Navigate to the details page on click
-                >
-      {/* Render the images */}
-      {car.imageUrls && car.imageUrls.length > 0 && (
-        
-        <div className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl">
+   {filteredCars.map((car, index) => (
+  <div
+    key={index}
+    className="flex flex-col gap-3 pb-3 cursor-pointer"
+    onClick={() => navigate(`/car-details/${car._id}`)} 
+  >
+    {car.imageUrls && car.imageUrls.length > 0 && (
+      <div className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl">
+        <img
+          src={car.imageUrls[0]} 
+          className="w-full h-full object-cover rounded-xl"
+        />
+      </div>
+    )}
+
+    {car.imageUrls && car.imageUrls.length > 1 && (
+      <div className="flex gap-2 mt-2 overflow-x-auto">
+        {car.imageUrls.slice(1).map((imageUrl, i) => (
           <img
-            src={car.imageUrls[0]} 
-            alt={car.title}
-            className="w-full h-full object-cover rounded-xl"
+            key={i}
+            src={imageUrl}
+            alt={`${car.title} - additional image ${i + 1}`}
+            className="w-16 h-16 object-cover rounded-md cursor-pointer"
           />
-        </div>
-      )}
+        ))}
+      </div>
+    )}
       
-      {/* Car Information */}
       <div className="flex flex-col gap-2">
-        {/* Car Title */}
         <p className="text-[#FFFFFF] text-base font-medium leading-normal">{car.title}</p>
-
-        {/* Car Description */}
         <p className="text-[#ABABAB] text-sm font-normal leading-normal">{car.description}</p>
-
-        {/* Car Number */}
         <p className="text-[#ABABAB] text-sm font-normal leading-normal">Car Number: {car.carNumber}</p>
-
-        {/* Car Year */}
         <p className="text-[#ABABAB] text-sm font-normal leading-normal">Year: {car.year}</p>
-
-        {/* Car Price */}
         <p className="text-[#EA2831] text-lg font-bold leading-normal">Price: ${car.price}</p>
-        
-        {/* Optionally, you can add any other fields you have for the car */}
-        {/* Example: Car Condition */}
         {car.condition && (
           <p className="text-[#ABABAB] text-sm font-normal leading-normal">Condition: {car.condition}</p>
         )}
