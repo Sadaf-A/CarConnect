@@ -18,7 +18,7 @@ const ProductInfo = () => {
     const fetchProductInfo = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`https://global-dominion-383716.el.r.appspot.com/api/cars/get-car/${carId}`, {
+        const response = await axios.get(`https://hallowed-fin-447404-e6.el.r.appspot.com/api/cars/get-car/${carId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCar(response.data);
@@ -70,7 +70,7 @@ const ProductInfo = () => {
   const handleUpdateCar = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`https://global-dominion-383716.el.r.appspot.com/api/cars/update-car/${carId}`, formData, {
+      await axios.put(`https://hallowed-fin-447404-e6.el.r.appspot.com/api/cars/update-car/${carId}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success('Car updated successfully');
@@ -84,7 +84,7 @@ const ProductInfo = () => {
   const handleDeleteCar = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://global-dominion-383716.el.r.appspot.com/api/cars/delete-car/${carId}`, {
+      await axios.delete(`https://hallowed-fin-447404-e6.el.r.appspot.com/api/cars/delete-car/${carId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success('Car deleted successfully');
