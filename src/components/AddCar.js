@@ -69,7 +69,7 @@ const AddCar = () => {
         formData.append('images', file);
       });
   
-      const response = await axios.post('https://global-dominion-383716.el.r.appspot.com/api/cars/add-car', formData, {
+      const response = await axios.post('https://hallowed-fin-447404-e6.el.r.appspot.com/api/cars/add-car', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
