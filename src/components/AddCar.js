@@ -9,17 +9,15 @@ const AddCar = () => {
   const [year, setYear] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
-  const [images, setImages] = useState([]); // State for images
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Handle image file selection
   const handleImageChange = (event) => {
     const files = event.target.files;
-    setImages(Array.from(files)); // Convert FileList to array
+    setImages(Array.from(files)); 
   };
 
-  // Function to upload images to cloud and get URLs
   const uploadImages = async (imageFiles) => {
     try {
       const formData = new FormData();
@@ -27,13 +25,13 @@ const AddCar = () => {
         formData.append('images', file);
       });
 
-      const response = await axios.post('https://global-dominion-383716.el.r.appspot.com/api/cars/add-car', formData, {
+      const response = await axios.post('https://hallowed-fin-447404-e6.el.r.appspot.com/api/cars/add-car', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      return response.data.imageUrls; // Assume your backend returns the uploaded image URLs
+      return response.data.imageUrls;
     } catch (error) {
       console.error('Error uploading images:', error);
       message.error('Failed to upload images. Please try again.');
@@ -45,7 +43,6 @@ const AddCar = () => {
     event.preventDefault();
     setLoading(true);
   
-    // Basic validation
     if (!title || !carNumber || !year || !price || !description) {
       message.error('All fields must be filled!');
       setLoading(false);
@@ -56,26 +53,22 @@ const AddCar = () => {
       const token = localStorage.getItem('token');
       if (!token) {
         message.error('You must be logged in to add a car!');
-        navigate('/'); // Redirect to login if no token
+        navigate('/');
         return;
       }
   
-      // Prepare form data
       const formData = new FormData();
       
-      // Append regular form fields to FormData
       formData.append('title', title);
       formData.append('carNumber', carNumber);
       formData.append('year', year);
       formData.append('price', price);
       formData.append('description', description);
   
-      // If there are images, append them to FormData
       images.forEach((file) => {
         formData.append('images', file);
       });
   
-      // Make API call to add car
       const response = await axios.post('https://global-dominion-383716.el.r.appspot.com/api/cars/add-car', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
