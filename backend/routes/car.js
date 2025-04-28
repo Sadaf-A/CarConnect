@@ -298,7 +298,7 @@ router.post('/add-car', authenticateUser, upload.array('images', 5), async (req,
 
       fs.unlinkSync(tempFilePath);
 
-      imageUrls.push(`https://storage.googleapis.com/car-connect/${destFileName}`);
+      imageUrls.push(`https://storage.googleapis.com/car-connect123/${destFileName}`);
     }
     
     const newCar = new Car({

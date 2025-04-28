@@ -20,7 +20,7 @@ const CarConnect = () => {
           navigate('/');
           return;
         }
-        const response = await axios.get('https://hallowed-fin-447404-e6.el.r.appspot.com/api/cars/get-cars', {
+        const response = await axios.get('https://refined-spirit-456112-e0.as.r.appspot.com/api/cars/get-cars', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCars(response.data); 
