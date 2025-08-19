@@ -25,7 +25,7 @@ const AddCar = () => {
         formData.append('images', file);
       });
 
-      const response = await axios.post('test-web-site-464607@appspot.gserviceaccount.com/api/cars/add-car', formData, {
+      const response = await axios.post('https://test-web-site-464607@appspot.gserviceaccount.com/api/cars/add-car', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -69,7 +69,7 @@ const AddCar = () => {
         formData.append('images', file);
       });
   
-      const response = await axios.post('test-web-site-464607@appspot.gserviceaccount.com/api/cars/add-car', formData, {
+      const response = await axios.post('https://test-web-site-464607@appspot.gserviceaccount.com/api/cars/add-car', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
