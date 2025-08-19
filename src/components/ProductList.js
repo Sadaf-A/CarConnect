@@ -20,7 +20,7 @@ const CarConnect = () => {
           navigate('/');
           return;
         }
-        const response = await axios.get('https://test-web-site-464607@appspot.gserviceaccount.com/api/cars/get-cars', {
+        const response = await axios.get('https://test-web-site-464607.df.r.appspot.com/api/cars/get-cars', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCars(response.data); 
